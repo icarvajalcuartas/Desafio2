@@ -3,6 +3,8 @@
 #include <cstdlib>
 #include <ctime>
 #include "Funciones.h"
+#include"Surtidores.h"
+#include"Tanques.h"
 
 using namespace std;
 
@@ -10,7 +12,8 @@ int main() {
 
     srand(static_cast<unsigned int>(time(0)));
     int x;
-    cout<<"Si desea una venta aleatoria presione 1 o 2  para una venta ingresando datos";
+    cout<<"Si desea una venta aleatoria presione 1 o 2  para una venta ingresando datos"<<endl;
+    cout<<"Si desea crear un surtidor"<<endl;
     cin>>x;
     switch (x) {
     case 1:{
@@ -20,7 +23,7 @@ int main() {
         break;
     }
     case 2:{
-        // Solicitar datos al usuario para una nueva venta
+
         cout << "\n--- Ingrese los detalles de la venta ---\n";
         float litros;
         unsigned short int categoria, metodo,region;
@@ -63,7 +66,7 @@ int main() {
         cout << "Numero de documento del cliente (10 cifras): ";
         cin >> documento;
 
-        // Crear una nueva venta con los datos ingresados por el usuario
+
         Ventas ventaUsuario;
         ventaUsuario.setLitros(litros);
         ventaUsuario.setCategoriaGasolina(categoria);
@@ -71,9 +74,42 @@ int main() {
         ventaUsuario.setRegion(region);
         ventaUsuario.setDocumentoCliente(documento);
 
-        // Mostrar información de la venta del usuario
+
         cout << "\n--- Información de la venta ingresada por el usuario ---\n";
         ventaUsuario.mostrarInformacionVenta();
+        break;
+    }
+    case 3:{
+        short int litros;
+        cout<<"Ingrese la cantidad de litros disponible"<<endl;
+        cin>>litros;
+        Surtidores Surtidor(litros);
+        cout<<"Informacion del surtidor"<<endl;
+        Surtidor.mostrarInformacionSurtidor();
+        break;
+    }
+
+    case 4:{
+        short int cantSurti,j,q,k;
+        cout<<"ingrese la cantidad de surtidores que desea para el tanque: "<<endl;
+        cin>>j;
+        cin>>q;
+        cin>>k;
+        cin>>cantSurti;
+        Tanques Tanque(cantSurti,j,q,k);
+        cout<<"Información del tanque:"<<endl;
+        Tanque.mostrarInformacionTanque();
+        break;
+    }
+    case 5:{
+        Tanques Tanque1;
+        Tanque1.mostrarInformacionTanque();
+        break;
+    }
+    case 6:{
+        Surtidores Surtidor;
+        cout<<"Informacion del surtidor"<<endl;
+        Surtidor.mostrarInformacionSurtidor();
         break;
     }
     default:
