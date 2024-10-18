@@ -5,39 +5,23 @@ using namespace std;
 #include <cstdlib>
 #include <ctime>
 
-Tanques::Tanques() {
+Tanques::Tanques(short int idEstacion):estacion(idEstacion) {
     cantidadSurtidores = rand() % 11 + 2;
-    cout<<"PRUEBA TANQUES LA CANTIDAD ALEATORIA ES:"<<cantidadSurtidores<<endl;
     eco = (rand() % 101) + 100;
     corriente = (rand() % 101) + 100;
     premium = (rand() % 101) + 100;
-
-
     short int suma=eco + corriente + premium;
     arreglo=new Surtidores[cantidadSurtidores];
     for (short int i=0;i<cantidadSurtidores;i++){
-        arreglo[i]=Surtidores(suma,1);
+        arreglo[i]=Surtidores(suma,estacion);
     }
-
 }
+Tanques::Tanques():estacion(0){
+    cantidadSurtidores=0;
+    eco=0;
+    corriente=0;
+    premium=0;
 
-Tanques::Tanques(short int cantidad,short int geco, short int gcorriente, short int gpremium) {
-
-    if ((cantidad>2 && cantidad<12)||(cantidad==2)||(cantidad==12)){
-        cantidadSurtidores = cantidad;
-    }
-
-    eco = geco;
-    corriente = gcorriente;
-    premium =gpremium;
-
-
-    short int suma=eco + corriente + premium;
-
-    arreglo=new Surtidores[cantidadSurtidores];
-    for (short int i=0;i<cantidadSurtidores;i++){
-        arreglo[i]=Surtidores(suma,1);
-    }
 }
 Tanques::~Tanques(){
     delete[]arreglo;
@@ -56,7 +40,9 @@ void Tanques::setPremium(short int premiumLitros) {
     premium = premiumLitros;
 }
 
-
+void Tanques::setCantidadSurtidores(short int cantSurtidores){
+    cantidadSurtidores=cantSurtidores;
+}
 short int Tanques::getEco() const {
     return eco;
 }

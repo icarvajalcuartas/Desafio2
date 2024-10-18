@@ -5,9 +5,10 @@
 #include "Funciones.h"
 #include"Surtidores.h"
 #include"Tanques.h"
+#include"Estaciones.h"
 
 using namespace std;
-
+/*
 int main() {
 
     srand(static_cast<unsigned int>(time(0)));
@@ -17,7 +18,7 @@ int main() {
     cin>>x;
     switch (x) {
     case 1:{
-        Ventas ventaAleatoria(-1,-1,-1,-1,-1);
+        Ventas ventaAleatoria(4567);
         cout << "--- Informacion de la venta aleatoria ---\n";
         ventaAleatoria.mostrarInformacionVenta();
         break;
@@ -67,7 +68,7 @@ int main() {
         cin >> documento;
 
 
-        Ventas ventaUsuario;
+        Ventas ventaUsuario(litros,categoria,metodo,region,documento);
         ventaUsuario.setLitros(litros);
         ventaUsuario.setCategoriaGasolina(categoria);
         ventaUsuario.setMetodoPago(metodo);
@@ -80,41 +81,45 @@ int main() {
         break;
     }
     case 3:{
-        short int litros;
-        cout<<"Ingrese la cantidad de litros disponible"<<endl;
-        cin>>litros;
-        Surtidores Surtidor(litros);
-        cout<<"Informacion del surtidor"<<endl;
-        Surtidor.mostrarInformacionSurtidor();
-        break;
-    }
-
-    case 4:{
-        short int cantSurti,j,q,k;
-        cout<<"ingrese la cantidad de surtidores que desea para el tanque: "<<endl;
-        cin>>j;
-        cin>>q;
-        cin>>k;
-        cin>>cantSurti;
-        Tanques Tanque(cantSurti,j,q,k);
-        cout<<"Información del tanque:"<<endl;
-        Tanque.mostrarInformacionTanque();
-        break;
-    }
-    case 5:{
-        Tanques Tanque1;
-        Tanque1.mostrarInformacionTanque();
-        break;
-    }
-    case 6:{
-        Surtidores Surtidor;
-        cout<<"Informacion del surtidor"<<endl;
-        Surtidor.mostrarInformacionSurtidor();
+        short int codigo=0;
+        short int islas=0;3
+        short int region=0;
+        float latitud,longitud;
+        Tanques tanquesur;
+        std::string gerente;
+        Estaciones estacion;
+        codigo=estacion.getId();
+        gerente=estacion.getGerente();
+        islas=estacion.getIslas();
+        latitud=estacion.getLatitud();
+        longitud=estacion.getLongitud();
+        region=estacion.getRegion();
+        tanquesur=estacion.getTanque();
         break;
     }
     default:
         cout << "Opcion no valida. Por favor elija 1 o 2." <<endl;
         break;
     }
+    return 0;
+}
+*/
+int main() {
+    const int MAX_ESTACIONES = 1; // Define el tamaño máximo del arreglo
+    Estaciones estaciones[MAX_ESTACIONES]; // Arreglo de objetos Estaciones
+    for (int i = 0; i < MAX_ESTACIONES; ++i) {
+        std::cout << "Ingrese datos para la estación " << (i + 1) << ":\n";
+
+
+        // Crear un objeto Estaciones y guardarlo en el arreglo
+        estaciones[i] = Estaciones();
+    }
+
+    // Imprimir los datos de las estaciones almacenadas
+    std::cout << "\nEstaciones almacenadas:\n";
+    for (int i = 0; i < MAX_ESTACIONES; ++i) {
+        estaciones[i].mostrarInformacionEstaciones();
+    }
+
     return 0;
 }

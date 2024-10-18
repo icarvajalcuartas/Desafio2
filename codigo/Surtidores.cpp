@@ -2,44 +2,22 @@
 #include "Surtidores.h"
 #include <iostream>
 using namespace std;
-
-Surtidores::Surtidores(){
-    litrosDisp=rand() % (601 - 100) + 100;
-    cantVentas = rand() % 10 + 1;
-    codigo = rand() % 9000 + 1000;
-    modelo = 'A' + rand() % 26;
-
-    ventas = new Ventas[cantVentas];
-    for (short int i = 0; i < cantVentas; i++) {
-        ventas[i] = Ventas();
-    }
-    activo = true;
-
+Surtidores::Surtidores(): codigo(rand() % 9000 + 1000),
+    venta(codigo) {
+    idEstacion=0;
+    litrosDisp = 0;
+    modelo = ' ';
+    activo = false;
 }
 
 
-Surtidores::Surtidores(short int litros, short int cantidad) {
+Surtidores::Surtidores(short int litros, short int estacion): codigo(rand() % 9000 + 1000),
+    venta(codigo) {
     litrosDisp = litros;
-
-    if (cantidad == -1) {
-        cantVentas = rand() % 10 + 1;
-    } else {
-        cantVentas = cantidad > 10 ? 10 : cantidad;
-    }
-
-    codigo = rand() % 9000 + 1000;
+    idEstacion=estacion;
     modelo = 'A' + rand() % 26;
 
-
-    ventas = new Ventas[cantVentas];
-    for (short int i = 0; i < cantVentas; i++) {
-        ventas[i] = Ventas();
-    }
     activo = true;
-}
-
-Surtidores::~Surtidores() {
-    delete[] ventas;
 }
 
 
@@ -55,10 +33,9 @@ char Surtidores::getModelo() const {
     return modelo;
 }
 
-short int Surtidores::getCantidadVentas() const {
-    return cantVentas;
+short int Surtidores::getIdEstacion()const{
+    return idEstacion;
 }
-
 bool Surtidores::isActivo() const {
     return activo;
 }
@@ -86,11 +63,7 @@ void Surtidores::actualizarEstado() {
 void Surtidores::mostrarInformacionSurtidor() const {
     cout << "Surtidor - Codigo: " << codigo << ", Modelo: " << modelo<<endl;
     cout << ", Litros Disponibles: " << litrosDisp<<endl;
-    cout << ", Cantidad de Ventas: " << cantVentas<<endl;
     cout << ", Activo: " << (activo ? "Si" : "No") <<endl;
-
-    for (short int i = 0; i < cantVentas; i++) {
-        cout << "Venta " << (i + 1) << ": ";
-        ventas[i].mostrarInformacionVenta(); // Mostrar información de cada venta
-    }
+    cout<<"Su estacion respectiva es: "<<idEstacion<<endl;
+    venta.mostrarInformacionVenta();
 }

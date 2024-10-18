@@ -4,19 +4,18 @@
 class Surtidores {
 private:
     bool activo;
-    short int codigo,litrosDisp,cantVentas;
+    short int codigo,litrosDisp,idEstacion;
     char modelo;
-    Ventas *ventas;
+    Ventas venta;
 public:
     Surtidores();
-    Surtidores(short int litros, short int cantidad=-1);
+    Surtidores(short int litros,short int estacion);
 
-    ~Surtidores();
     short int getLitrosDisponibles() const;
     short int getCodigo() const;
     char getModelo() const;
-    short int getCantidadVentas() const;
     bool isActivo() const;
+    short int getIdEstacion()const;
 
     void setLitrosDisponibles(short int litros);
     void setModelo(char mod);
