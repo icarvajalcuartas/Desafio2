@@ -6,65 +6,44 @@
 #include "Funciones.h"
 using namespace std;
 
-// Método para generar una cantidad aleatoria de litros entre 3 y 20
-float Ventas::generarLitrosAleatorio() {
-    return (rand() % 18) + 3;  // Genera un número entre 3 y 20
-
-}
-
-// Método para generar una categoría aleatoria de gasolina (1-3)
-short int Ventas::generarCategoriaAleatoria() {
-    cout<<(rand() % 3) + 1<<endl;
-    return (rand() % 3) + 1;  // Genera un número entre 1 y 3
-}
-
-// Método para generar un método de pago aleatorio (1-3)
-short int Ventas::generarMetodoPagoAleatorio() {
-    cout<<(rand() % 3) + 1<<endl;
-    return (rand() % 3 )+ 1;  // Genera un número entre 1 y 3
-}
-
-short int Ventas::generarRegionAleatoria(){
-    cout<<(rand() % 3) + 1<<endl;
-    return (rand() % 3) + 1;  // Genera un número entre 1 y 3
-}
-// Método para generar un número de documento aleatorio de 10 dígitos
-long long  Ventas::generarDocumentoAleatorio() {
-    return 1000000000LL + rand() % 9000000000LL;  // Genera un número de 10 dígitos
-}
-
-// Método para obtener la fecha y hora actual
 void Ventas::obtenerFechaHoraActual() {
     auto now = chrono::system_clock::now();
     time_t tiempoActual = chrono::system_clock::to_time_t(now);
     tm* partesTiempo = localtime(&tiempoActual);
 
-    // Asignar fecha y hora con formato
+
     fecha = to_string(partesTiempo->tm_mday) + "/" + to_string(partesTiempo->tm_mon + 1) + "/" + to_string(partesTiempo->tm_year + 1900);
     hora = to_string(partesTiempo->tm_hour) + ":" + to_string(partesTiempo->tm_min);
 }
-
-// Método para calcular el monto total (4 litros = 15 pesos)
 float Ventas::calcularMontoTotal(short int reg, short int cat,float l ) {
-
     return l * precioGasolina(reg,cat);
 }
 
-// Constructor de la clase Ventas
-Ventas::Ventas(float l,short int cat, short int met,short int reg, long long doc) {
-    srand(time(0));
-    obtenerFechaHoraActual();  // Asignar la fecha y la hora
+Ventas::Ventas(short int codigo) {
+    obtenerFechaHoraActual();
+    codigoSurtidor=codigo;
+    litros=(rand() % 18) + 3;
+    categoriaGasolina =rand() % 3 + 1;
+    region = rand() % 3 + 1;
+    metodoPago = rand() % 3 + 1;
+    documentoCliente =  1000000000LL + rand() % 9000000000LL;
+    montoTotal = calcularMontoTotal(region,categoriaGasolina,litros);
 
-    // Si no se proporciona una cantidad, se genera aleatoriamente
-    litros = (l == -1) ? generarLitrosAleatorio() : l;
-    categoriaGasolina = (cat == -1) ? generarCategoriaAleatoria() : cat;
-    region = (reg == -1) ? generarRegionAleatoria() : reg;
-    metodoPago = (met == -1) ? generarMetodoPagoAleatorio() : met;
-    documentoCliente = (doc == -1) ? generarDocumentoAleatorio() : doc;
+}
 
-    // Calcular el monto total
+Ventas::Ventas(float l,short int cat, short int met,short int reg, long long doc){
+    obtenerFechaHoraActual();
+    codigoSurtidor=rand() % 9000 + 1000;
+    litros=l;
+    categoriaGasolina=cat;
+    region=reg;
+    metodoPago=met;
+    documentoCliente=doc;
     montoTotal = calcularMontoTotal(region,categoriaGasolina,litros);
 }
+
+
+
 void Ventas::setLitros(float l) {
     litros = l;
 }
@@ -80,10 +59,42 @@ void Ventas::setRegion(short int reg){
 void Ventas::setDocumentoCliente(long long doc) {
     documentoCliente = doc;
 }
-// Método para mostrar la información de la venta
-void Ventas::mostrarInformacionVenta() {
+void Ventas::setCodigoSurtidor(short cod){
+    codigoSurtidor=cod;
+}
+
+float Ventas:: getLitros()const{
+    return litros;
+}
+short int Ventas:: getCategoriaGasolina()const{
+    return categoriaGasolina;
+}
+short int Ventas::getRegion()const{
+    return region;
+}
+short int Ventas::getMetodo()const{
+    return metodoPago ;
+}
+long long Ventas:: getDocumentoCliente()const{
+    return documentoCliente;
+}
+float Ventas:: getMontoTotal()const{
+    return montoTotal;
+}
+short int Ventas:: getCodigoSurtidor()const{
+    return codigoSurtidor;
+}
+std::string Ventas::getFecha()const{
+    return fecha;
+}
+std::string Ventas:: getHora()const{
+    return hora;
+}
+
+void Ventas::mostrarInformacionVenta()const {
     cout << "Fecha: " << fecha << endl;
     cout << "Hora: " << hora << endl;
+    cout<<"surtidor con codigo: "<<codigoSurtidor<<endl;
     cout << "Cantidad de litros: " << litros << " L" << endl;
     cout << "Categoria de gasolina: " << categoriaGasolina << " (1: Premium, 2: Extra, 3: Eco)" << endl;
     cout << "Metodo de pago: " << metodoPago << " (1: TCredito, 2: TDebito, 3: Efectivo)" << endl;
