@@ -1,16 +1,15 @@
 #include <iostream>
-#include <fstream>
-#include <string>
-#include "Estaciones.h"
+#include "Ventas.h"
+#include <cstdlib>
+#include <ctime>
+#include "Funciones.h"
 #include "Surtidores.h"
 #include "Tanques.h"
-#include "Ventas.h"
+#include "Estaciones.h"
 
-
-
+using namespace std;
 
 int main() {
-    Estaciones estacion;
-    estacion.mostrarInformacionEstaciones();
+    srand(static_cast<unsigned>(time(0)));
+    menuPricipal();
 }
-
