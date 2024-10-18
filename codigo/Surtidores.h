@@ -20,6 +20,7 @@ public:
     void setLitrosDisponibles(short int litros);
     void setModelo(char mod);
 
+    Ventas getVenta()const;
 
     void actualizarEstado();
 

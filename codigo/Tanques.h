@@ -24,6 +24,7 @@ public:
     short int getPremium() const;
     short int getCantidadSurtidores() const;
 
+
     void mostrarInformacionTanque() const;
 
 };

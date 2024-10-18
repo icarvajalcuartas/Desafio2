@@ -17,3 +17,6 @@ HEADERS += \
     Surtidores.h \
     Tanques.h \
     Ventas.h
+
+DISTFILES += \
+    datos_estaciones.txt

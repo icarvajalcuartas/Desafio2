@@ -36,6 +36,11 @@ char Surtidores::getModelo() const {
 short int Surtidores::getIdEstacion()const{
     return idEstacion;
 }
+
+Ventas Surtidores:: getVenta()const{
+    return venta;
+}
+
 bool Surtidores::isActivo() const {
     return activo;
 }
